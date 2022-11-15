@@ -32,6 +32,8 @@ else()
     list(APPEND B2_OPTIONS address-model=32)
 endif()
 
+message(WARNING "Target architecture is ${VCPKG_TARGET_ARCHITECTURE}")
+
 if(VCPKG_TARGET_ARCHITECTURE STREQUAL "s390x")
     list(APPEND B2_OPTIONS architecture=s390x)
 elseif(VCPKG_TARGET_ARCHITECTURE STREQUAL "arm" OR VCPKG_TARGET_ARCHITECTURE STREQUAL "arm64")
