@@ -45,7 +45,7 @@ elseif(VCPKG_TARGET_ARCHITECTURE MATCHES "mips64")
 elseif("arm64" IN_LIST VCPKG_TARGET_ARCHITECTURE AND "x86_64" IN_LIST VCPKG_TARGET_ARCHITECTURE)
     list(APPEND B2_OPTIONS architecture=arm+x86)
 elseif(NOT VCPKG_CMAKE_SYSTEM_NAME STREQUAL "Emscripten") # Emscripten doesn't require an architecture to be set here, architecture gets set by Emscripten SDK
-    # list(APPEND B2_OPTIONS architecture=x86)
+    list(APPEND B2_OPTIONS architecture=x86)
 endif()
 
 if(VCPKG_TARGET_ARCHITECTURE STREQUAL "x86" AND WIN32)
