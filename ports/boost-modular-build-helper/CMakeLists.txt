@@ -32,8 +32,6 @@ else()
     list(APPEND B2_OPTIONS address-model=32)
 endif()
 
-message(WARNING "Target architecture is ${VCPKG_TARGET_ARCHITECTURE}")
-
 if(VCPKG_TARGET_ARCHITECTURE STREQUAL "s390x")
     list(APPEND B2_OPTIONS architecture=s390x)
 elseif(VCPKG_TARGET_ARCHITECTURE STREQUAL "arm" OR VCPKG_TARGET_ARCHITECTURE STREQUAL "arm64")
@@ -46,7 +44,7 @@ elseif(VCPKG_TARGET_ARCHITECTURE MATCHES "mips64")
     list(APPEND B2_OPTIONS architecture=mips64)
 elseif("arm64" IN_LIST VCPKG_TARGET_ARCHITECTURE AND "x86_64" IN_LIST VCPKG_TARGET_ARCHITECTURE)
     list(APPEND B2_OPTIONS architecture=arm+x86)
-else()
+elseif(NOT VCPKG_CMAKE_SYSTEM_NAME STREQUAL "Emscripten") # Emscripten doesn't require an architecture to be set here, architecture gets set by Emscripten SDK
     # list(APPEND B2_OPTIONS architecture=x86)
 endif()
 
