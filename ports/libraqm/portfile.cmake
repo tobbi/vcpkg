@@ -14,4 +14,7 @@ vcpkg_install_meson()
 vcpkg_copy_pdbs()
 vcpkg_fixup_pkgconfig()
 
+configure_file("${CMAKE_CURRENT_LIST_DIR}/raqm-config.cmake.in"
+               "${CURRENT_PACKAGES_DIR}/share/${PORT}/raqm-config.cmake" @ONLY)
+
 vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/COPYING")

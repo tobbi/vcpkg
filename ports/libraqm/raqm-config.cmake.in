@@ -1,0 +1,19 @@
+# Adapted from https://gist.github.com/vdamewood/05b5a34e8a0cb7b201640afb5652a287
+# Thanks to vdamewood for the original gist!
+
+set(_PREFIX "${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}")
+set(_LIBDIR "${_PREFIX}/lib")
+set(_LIBTYPE STATIC)
+set(_LIBFILE "${_LIBDIR}/libraqm.a")
+set(_INCDIR "${_PREFIX}/include")
+
+find_dependency(freetype2 CONFIG REQUIRED)
+find_dependency(harfbuzz CONFIG REQUIRED)
+find_dependency(fribidi CONFIG REQUIRED)
+
+add_library(raqm ${_LIBTYPE} IMPORTED)
+add_library(raqm::raqm ALIAS raqm GLOBAL)
+set_property(TARGET raqm PROPERTY IMPORTED_LOCATION "${_LIBFILE}")
+
+target_link_libraries(raqm INTERFACE Freetype::Freetype harfbuzz::harfbuzz fribidi::fribidi)
+target_include_directories(raqm INTERFACE "${_INCDIR}")
